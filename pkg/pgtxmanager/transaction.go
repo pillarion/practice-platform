@@ -7,6 +7,8 @@ import (
 )
 
 // TxManager represents a transaction manager
+//
+//go:generate minimock -o mock/ -s "_minimock.go"
 type TxManager interface {
 	ReadCommitted(ctx context.Context, f Handler) error
 }
@@ -15,6 +17,8 @@ type TxManager interface {
 type Handler func(ctx context.Context) error
 
 // Transactor represents a transactor
+//
+//go:generate minimock -o mock/ -s "_minimock.go"
 type Transactor interface {
 	BeginTx(ctx context.Context, txOptions pgx.TxOptions) (pgx.Tx, error)
 }

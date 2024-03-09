@@ -7,3 +7,9 @@ install-lint:
 lint:
 	GOBIN=$(LOCAL_BIN) golangci-lint run ./... --config .golangci.pipeline.yaml
 	GOBIN=$(LOCAL_BIN) govulncheck ./...
+
+install-deps:
+	go install github.com/gojuno/minimock/v3/cmd/minimock@v3.3.6
+
+mock-generate:
+	go generate	./...
