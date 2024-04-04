@@ -11,7 +11,6 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	txmanager "github.com/pillarion/practice-platform/pkg/pgtxmanager"
-	"github.com/pillarion/practice-platform/pkg/prettier"
 	"github.com/pkg/errors"
 )
 
@@ -98,10 +97,10 @@ func (p *pg) Close() {
 }
 
 func logQuery(ctx context.Context, q Query, args ...interface{}) {
-	prettyQuery := prettier.Pretty(q.QueryRaw, prettier.PlaceholderDollar, args...)
+	//prettyQuery := prettier.Pretty(q.QueryRaw, prettier.PlaceholderDollar, args...)
 	log.Println(
 		ctx,
 		fmt.Sprintf("sql: %s", q.Name),
-		fmt.Sprintf("query: %s", prettyQuery),
+		//fmt.Sprintf("query: %s", prettyQuery),
 	)
 }
