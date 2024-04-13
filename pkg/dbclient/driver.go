@@ -30,7 +30,7 @@ func NewDB(ctx context.Context, dsn string) (DB, error) {
 }
 
 func (p *pg) ScanOneContext(ctx context.Context, dest interface{}, q Query, args ...interface{}) error {
-	logQuery(ctx, q, args...)
+	logQuery(ctx, q) //, args...)
 
 	row, err := p.QueryContext(ctx, q, args...)
 	if err != nil {
@@ -41,7 +41,7 @@ func (p *pg) ScanOneContext(ctx context.Context, dest interface{}, q Query, args
 }
 
 func (p *pg) ScanAllContext(ctx context.Context, dest interface{}, q Query, args ...interface{}) error {
-	logQuery(ctx, q, args...)
+	logQuery(ctx, q) //, args...)
 
 	rows, err := p.QueryContext(ctx, q, args...)
 	if err != nil {
@@ -52,7 +52,7 @@ func (p *pg) ScanAllContext(ctx context.Context, dest interface{}, q Query, args
 }
 
 func (p *pg) ExecContext(ctx context.Context, q Query, args ...interface{}) (pgconn.CommandTag, error) {
-	logQuery(ctx, q, args...)
+	logQuery(ctx, q) //, args...)
 
 	tx, ok := ctx.Value(txmanager.TxKey).(pgx.Tx)
 	if ok {
@@ -63,7 +63,7 @@ func (p *pg) ExecContext(ctx context.Context, q Query, args ...interface{}) (pgc
 }
 
 func (p *pg) QueryContext(ctx context.Context, q Query, args ...interface{}) (pgx.Rows, error) {
-	logQuery(ctx, q, args...)
+	logQuery(ctx, q) //, args...)
 
 	tx, ok := ctx.Value(txmanager.TxKey).(pgx.Tx)
 	if ok {
@@ -74,7 +74,7 @@ func (p *pg) QueryContext(ctx context.Context, q Query, args ...interface{}) (pg
 }
 
 func (p *pg) QueryRowContext(ctx context.Context, q Query, args ...interface{}) pgx.Row {
-	logQuery(ctx, q, args...)
+	logQuery(ctx, q) //, args...)
 
 	tx, ok := ctx.Value(txmanager.TxKey).(pgx.Tx)
 	if ok {
@@ -96,7 +96,7 @@ func (p *pg) Close() {
 	p.dbc.Close()
 }
 
-func logQuery(ctx context.Context, q Query, args ...interface{}) {
+func logQuery(ctx context.Context, q Query) { //, args ...interface{}) {
 	//prettyQuery := prettier.Pretty(q.QueryRaw, prettier.PlaceholderDollar, args...)
 	log.Println(
 		ctx,
