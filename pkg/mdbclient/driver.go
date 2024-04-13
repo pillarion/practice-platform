@@ -12,7 +12,7 @@ type client struct {
 }
 
 // NewClient initializes a new DB driver using the provided database configuration.
-func NewClient(host string) *redis.Client {
+func NewDriver(host string) *redis.Client {
 	client := redis.NewClient(&redis.Options{
 		Addr:     host,
 		Password: "", // no password set
