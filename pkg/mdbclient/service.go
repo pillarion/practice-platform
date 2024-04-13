@@ -10,9 +10,3 @@ func NewMdbClient(cli Cache) *mdbClient {
 		cli: cli,
 	}
 }
-
-// Close closes the database client
-func (c *mdbClient) Close() error {
-	c.cli.Close()
-	return nil
-}
